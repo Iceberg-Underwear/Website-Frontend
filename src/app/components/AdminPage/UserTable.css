@@ -1,0 +1,20 @@
+.user-table {
+    width: 90vw;
+    margin-left: 10vw;
+    border-collapse: collapse;
+  }
+  .user-table th, .user-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+  .user-table th {
+    background: #eee;
+  }
+  button {
+    margin-right: 5px;
+    padding: 4px 8px;
+  }
+  button.delete {
+    color: #a00;
+  }
+  

@@ -87,7 +87,7 @@ export default function Header() {
           </IconButton>
 
           <Button variant="contained" color="primary">
-            <Link href="/auth/login" style={{ textDecoration: "none", color: "#fff" }}>Вход</Link>
+            <Link href="/auth" style={{ textDecoration: "none", color: "#fff" }}>Вход</Link>
           </Button>
         </Box>
       </Toolbar>
