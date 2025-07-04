@@ -43,7 +43,7 @@ export default function OrdersPage() {
       <Header />
       <Sidebar />
       <main>
-        <h1>Orders</h1>
+        <h1>Поръчки</h1>
         <OrderTable orders={orders!} />
       </main>
     </div>

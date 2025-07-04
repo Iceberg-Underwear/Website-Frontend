@@ -6,21 +6,23 @@ import './Sidebar.css';
 export default function Sidebar() {
   const path = usePathname();
   const menu = [
-    { label: 'Потребители', href: '/admin/users' },
-    { label: 'Продукти', href: '/admin/products' },
-    { label: 'Поръчки', href: '/admin/orders' },
+    { label: 'Потребители', href: '/admin/users', icon: '👤' },
+    { label: 'Продукти', href: '/admin/products', icon: '📦' },
+    { label: 'Поръчки', href: '/admin/orders', icon: '🛒' },
   ];
 
   return (
     <nav className="sidebar">
-      <h2>Admin</h2>
+      <h2>Контролен панел</h2>
       {menu.map(m => (
         <Link
           key={m.href}
           href={m.href}
           className={path === m.href ? 'active' : ''}
+          aria-label={m.label} // accessibility: label for icon-only links
         >
-          {m.label}
+          <span className="icon">{m.icon}</span>
+          <span className="label">{m.label}</span>
         </Link>
       ))}
     </nav>

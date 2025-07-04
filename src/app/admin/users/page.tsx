@@ -43,7 +43,7 @@ export default function UsersPage() {
       <Header />
       <Sidebar />
       <main>
-        <h1>Users</h1>
+        <h1>Потребители</h1>
         <UserTable users={users!} />
       </main>
     </div>

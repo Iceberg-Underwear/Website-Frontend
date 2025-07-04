@@ -1,6 +1,12 @@
+.wrapper {
+  width: 100%;        
+  overflow-x: auto;   
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar; 
+}
 .order-table {
     width: 90%;
-    border-collapse: collapse;
+    border-collapse:collapse;
   }
   .order-table th, .order-table td {
     border: 1px solid #ccc;

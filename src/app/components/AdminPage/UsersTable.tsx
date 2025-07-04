@@ -13,7 +13,7 @@ type User = {
 export default function UserTable({ users }: { users: User[] }) {
     //console.log("Users to render: "+users[0].id);
   return (
-    <>
+    <div className='wrapper'>
     <table className="user-table">
       <thead>
         <tr>
@@ -35,6 +35,6 @@ export default function UserTable({ users }: { users: User[] }) {
         ))}
       </tbody>
     </table>
-    </>
+    </div>
   );
 }

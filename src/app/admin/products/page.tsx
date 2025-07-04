@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import Header from '@/app/components/Header';
 import AddProductForm from '@/app/components/AdminPage/AddProductForm';
 import "./page.css";
+import EditProductForm from '@/app/components/AdminPage/EditProductForm';
 
 export type Product = {
     id: string;
@@ -21,7 +22,20 @@ export default function ProductsPage() {
  const [products, setProducts] = useState<Array<Product> | null>(null);
   const auth_token = useSelector((state: RootState) => state.auth.access_token);
 
-  const [isAddingProduct, setIsAddingProduct] = useState<boolean>(false);
+  const [isAddingProduct, setIsAddingProduct] = useState<boolean>(true);
+  const [currentEditProduct, setCurrentEditProduct] = useState<import("@/app/page").Product>();
+
+  function setEditMode() {
+    setIsAddingProduct(false);
+  }
+
+  function setAddMode() {
+    setIsAddingProduct(true);
+  }
+
+  function setProductForEdit(product: import("@/app/page").Product) {
+    setCurrentEditProduct(product);
+  }
 
   useEffect(() => { 
     async function getProducts() {
@@ -45,9 +59,13 @@ export default function ProductsPage() {
       <Header />
       <Sidebar />
       <main className='content'>
-        <h1>Products</h1>
-        <AddProductForm onProductAdded={() => window.location.reload()}/>
-        <ProductCards products={products!} /> 
+        <h1>Артикули</h1>
+        {
+          isAddingProduct ?
+          <AddProductForm onProductAdded={() => window.location.reload()}/>
+          : <EditProductForm onProductAdded={() => window.location.reload()} onCancel={setAddMode} productData={currentEditProduct!}/>
+        }
+        <ProductCards products={products!} onEdit={setEditMode} setEditProduct={setProductForEdit}/> 
       </main>
     </div>
   );

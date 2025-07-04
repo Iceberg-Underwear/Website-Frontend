@@ -1,20 +1,66 @@
 .sidebar {
-    width: 10vw;
-    background: #223;
-    color: #eee;
-    padding: 20px;
-    height: 100vh;
-    position: fixed;
+  width: 10vw;
+  min-width: 80px;
+  max-width: 250px;
+  background: #223;
+  color: #eee;
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+  box-sizing: border-box;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: #eee;
+  text-decoration: none;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.sidebar a .icon {
+  margin-right: 10px;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* Highlight active and hover */
+.sidebar a:hover,
+.sidebar a.active {
+  background: #445;
+}
+
+/* MOBILE: narrow sidebar, hide labels */
+@media (max-width: 600px) {
+  .sidebar {
+    width: 60px;        /* narrow fixed width */
+    padding: 10px 0;
   }
-  .sidebar h2 { margin-bottom: 20px; }
+
+  .sidebar h2 {
+    display: none;      /* hide title to save space */
+  }
+
   .sidebar a {
-    display: block;
-    padding: 10px;
-    color: #eee;
-    text-decoration: none;
+    justify-content: center;
+    padding: 15px 0;
   }
-  .sidebar a:hover,
-  .sidebar a.active {
-    background: #445;
+
+  .sidebar a .label {
+    display: none;      /* hide text labels */
   }
-  
+
+  .sidebar a .icon {
+    margin: 0;
+  }
+}

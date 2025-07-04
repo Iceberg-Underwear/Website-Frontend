@@ -14,7 +14,7 @@ const images = [
 
 export default function CarouselBanner() {
   return (
-    <Box sx={{ width: "100%", height: "400px", overflow: "hidden" }}>
+    <Box sx={{ width: "100%", height: {xs: "30vh", md: "45vh"}, overflow: "hidden" }}>
       <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{ delay: 5000 }}

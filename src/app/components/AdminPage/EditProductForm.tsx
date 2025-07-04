@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AddProductForm.css';
+import { Product } from '@/app/page';
 
-export default function AddProductForm({ onProductAdded }: { onProductAdded: () => void }) {
-  const [formVisible, setFormVisible] = useState(false);
+export default function EditProductForm({ onProductAdded, onCancel, productData }: { onProductAdded: () => void, onCancel: CallableFunction, productData: Product }) {
+  const [formVisible, setFormVisible] = useState(true);
   const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState<number>();
   const [description, setDescription] = useState('');
   const [sizes, setSizes] = useState('');
   const [colors, setColors] = useState('');
@@ -16,6 +17,15 @@ export default function AddProductForm({ onProductAdded }: { onProductAdded: () 
 
   const toggleForm = () => setFormVisible(!formVisible);
 
+  useEffect(() => {
+    setName(productData.name);
+    setPrice(productData.price);
+    setDescription(productData.description);
+    setSizes(productData.sizes);
+    setColors(productData.colors);
+    setTags(productData.tags!);
+
+  }, [formVisible, productData])
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const access_token = localStorage.getItem("auth_token");
@@ -41,8 +51,9 @@ export default function AddProductForm({ onProductAdded }: { onProductAdded: () 
     }
 
     const productPayload = {
+      id: productData.id,
       name,
-      price: parseFloat(price),
+      price: price,
       description,
       sizes,
       colors,
@@ -51,7 +62,7 @@ export default function AddProductForm({ onProductAdded }: { onProductAdded: () 
     };
 
     const res = await fetch("https://website-backend-e2kt.onrender.com/product", {
-      method: "POST",
+      method: "PUT",
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${access_token}`
@@ -70,9 +81,9 @@ export default function AddProductForm({ onProductAdded }: { onProductAdded: () 
 
   return (
     <div className="add-product-container">
-      <button className="toggle-btn" onClick={toggleForm}>
-        {formVisible ? "Отказ от добавяне" : "Добави нова стока"}
-      </button>
+      {formVisible ?? <button className="toggle-btn" onClick={() => {toggleForm(); onCancel();}}>
+        Отказ от редактиране
+      </button> }
       {formVisible && (
         <form className="product-form" onSubmit={handleSubmit}>
             <div className="product-form-left">
@@ -88,7 +99,7 @@ export default function AddProductForm({ onProductAdded }: { onProductAdded: () 
                 type="number"
                 placeholder="Цена"
                 value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                onChange={(e) => setPrice(Number(e.target.value))}
                 required
             />
             <textarea

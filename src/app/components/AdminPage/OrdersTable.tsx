@@ -13,6 +13,7 @@ type Order = {
 
 export default function OrderTable({ orders }: { orders: Order[] }) {
   return (
+    <div className='wrapper'>
     <table className="order-table">
       <thead>
         <tr>
@@ -36,5 +37,6 @@ export default function OrderTable({ orders }: { orders: Order[] }) {
         ))}
       </tbody>
     </table>
+    </div>
   );
 }

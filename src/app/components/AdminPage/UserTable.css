@@ -1,7 +1,14 @@
+.wrapper {
+  width: 100%;        
+  overflow-x: auto;   
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar; 
+}
 .user-table {
     width: 90vw;
     margin-left: 10vw;
     border-collapse: collapse;
+    overflow: scroll;
   }
   .user-table th, .user-table td {
     border: 1px solid #ccc;
